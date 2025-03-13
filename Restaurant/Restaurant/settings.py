@@ -40,7 +40,12 @@ INSTALLED_APPS = [
     'home',
     'categorie',
     'products',
+    'cart',
+    'payments',
 ]
+
+STRIPE_SECRET_KEY="sk_test_51QE8B1BCbRMGAyYlIP27I36xIkszY7x97X0DOQw8LuJsVdmjCIWu9bSuMyw2WfpY3KZrzBNQiKqsasmczwLUvASM00mL0SIfuz"
+STRIPE_PUBLISHABLE_KEY="pk_test_51QE8B1BCbRMGAyYl30Y0QnnCeywIDaM7DtIXTKgrEV2OvsAp8nYrA44QyfMYYcbrocVsP1sTZhTdJQXbvZdzPr3f00yilOPMug"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
