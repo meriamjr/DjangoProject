@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'products',
     'cart',
     'payments',
+    'reservation',
+    'chatbot',
 ]
 
 STRIPE_SECRET_KEY="sk_test_51QE8B1BCbRMGAyYlIP27I36xIkszY7x97X0DOQw8LuJsVdmjCIWu9bSuMyw2WfpY3KZrzBNQiKqsasmczwLUvASM00mL0SIfuz"
@@ -126,6 +128,9 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
 os.path.join(BASE_DIR, 'static'), # Répertoire global
 ]
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'cart:view_cart'  # Updated redirect URL
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

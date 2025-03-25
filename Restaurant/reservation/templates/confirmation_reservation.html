@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Confirmation</title>
+</head>
+<body>
+    <h1>Confirmez votre réservation</h1>
+    <p>Nom : {{ reservation.nom_client }}</p>
+    <p>Email : {{ reservation.email }}</p>
+    <p>Date : {{ reservation.date_reservation }}</p>
+    <p>Heure : {{ reservation.heure_reservation }}</p>
+    <p>Nombre de personnes : {{ reservation.nombre_personnes }}</p>
+    <p>Commentaires : {{ reservation.commentaires }}</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmer</button>
+    </form>
+
+</body>
+</html>

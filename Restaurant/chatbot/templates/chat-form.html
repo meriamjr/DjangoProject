@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+</head>
+<body>
+    <h1>Chat with Bot</h1>
+    <form id="chat-form">
+        <input type="text" id="user-message" placeholder="Type your message">
+        <button type="submit">Send</button>
+    </form>
+    <div id="chat-log"></div>
+    
+    <script>
+        document.getElementById("chat-form").addEventListener("submit", async function (event) {
+            event.preventDefault();
+            const userMessage = document.getElementById("user-message").value;
+
+            const response = await fetch("http://127.0.0.1:8000/api/chat/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json", // Changer le type de contenu à application/json
+                },
+                body: JSON.stringify({ message: userMessage }), // Convertir les données en JSON
+            });
+
+            const data = await response.json();
+            const chatLog = document.getElementById("chat-log"); 
+
+            chatLog.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
+            if (data.bot_response) { 
+                chatLog.innerHTML += `<p><strong>Bot:</strong> ${data.bot_response}</p>`;
+            } else {
+                chatLog.innerHTML += `<p><strong>Error:</strong> ${data.error}</p>`;
+            }
+        
+        });
+    </script>
+</body>
+</html>

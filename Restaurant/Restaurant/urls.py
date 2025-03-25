@@ -16,10 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from . import views
+"""vue pour gerer le login des utilisateurs"""
+from django.contrib.auth import views as auth_views 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
     path('', include('cart.urls')),
     path('payments/', include('payments.urls')),
+    path('login/', auth_views.LoginView.as_view(), name='login'),
+    path('register/', views.RegisterView.as_view(), name='register'),
+    path('logout/', views.Logout_view, name='logout'),
+    path('', include('reservation.urls')),
+    path("api/", include("chatbot.urls")), 
 ]

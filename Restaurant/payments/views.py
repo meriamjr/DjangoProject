@@ -5,13 +5,13 @@ import stripe
 from django.shortcuts import render,redirect
 from cart.models import Cart
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 def create_checkout_session(request):
     # Récupérer les items du panier à partir de la fonction utilitaire
-    cart_items = get_cart_items()
-    # Préparer les items pour Stripe
+    cart_items = get_cart_items(request)    # Préparer les items pour Stripe
     line_items = []
     for item in cart_items:
         line_items.append({
@@ -37,10 +37,12 @@ def create_checkout_session(request):
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=400)
 
-def get_cart_items():
+@login_required
+def get_cart_items(request):
     # récupérer les articles du modèle Cart
     cart_items = []  # Déplacez l'initialisation ici pour l'assurer en dehors de la boucle
-    cart_objects = Cart.objects.select_related('product').filter(status=False)    
+    cart_objects = Cart.objects.select_related('product').filter(user=request.user,
+status=False)
     
     for cart in cart_objects:
         cart_items.append({
